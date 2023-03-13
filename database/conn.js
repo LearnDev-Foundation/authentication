@@ -1,8 +1,14 @@
 import mongoose from "mongoose";
-import { MongoMemoryServer } from "mongodb-memory-server";
+
+import { mongodburi } from "../config.js";
 
 async function connect(){
-    const mongodb = await M
+
+    const db = await mongoose.connect(mongodburi, { useNewUrlParser: true });
+    console.log("Database connected");
+
+    return db;
+
 }
 
 export default connect;
