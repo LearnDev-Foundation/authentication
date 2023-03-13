@@ -8,7 +8,7 @@ import { registerMail, resetPasswordMail } from "../controllers/mailer.js";
 router.route('/register').post(controller.register);
 router.route('/registerMail').post(registerMail);
 router.route('/resetPasswordMail').post(resetPasswordMail);
-router.route('/authentication').post((req, res) => res.end());
+router.route('/authentication').post(controller.verifyOTP, (req, res) => res.end());
 router.route('/login').post(controller.verifyUser, controller.login);
 
 router.route('/user/:username').get(controller.getUser);
