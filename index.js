@@ -8,9 +8,13 @@ const app = express();
 
 // Middlewares
 app.use(express.json());
-app.use(cors());
 app.use(morgan('tiny'));
 app.disable('x-powered-by');
+app.use(cors({
+    origin: 'http://localhost:5173',
+    credentials: true
+}));
+  
 
 const port = 8080 || process.env.PORT;
 
