@@ -3,14 +3,21 @@ import cors from 'cors';
 import morgan from 'morgan';
 import connect from './database/conn.js';
 import router from './routes/route.js';
+import dotenv from 'dotenv';
 
-const app = express(); 
+dotenv.config();
+
+const app = express();
 
 // Middlewares
 app.use(express.json());
-app.use(cors());
 app.use(morgan('tiny'));
 app.disable('x-powered-by');
+app.use(cors({
+    origin: 'http://localhost:5173',
+    credentials: true
+}));
+  
 
 const port = 8080 || process.env.PORT;
 

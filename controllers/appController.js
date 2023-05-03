@@ -16,7 +16,7 @@ export async function verifyUser(req, res, next){
 
 export async function register(req, res){
     
-    const { username, password, profile, email } = req.body;
+    const { username, password, email } = req.body;
 
     User.findOne({ email: email})
         .then(user => {
@@ -31,7 +31,6 @@ export async function register(req, res){
                             const newUser = new User({
                                 username: username,
                                 password: password,
-                                profile: profile || "",
                                 email: email
                             });
                             bcrypt.genSalt(10, (err, salt) => {
@@ -66,8 +65,7 @@ export async function login(req, res){
                     if (isMatch) {
                         // create jwt token
                         const token = jwt.sign({
-                            id: user._id,
-                            username: user.username,
+                            id: user._id
                         }, jwtSecret, { expiresIn : "24h"});
     
                         return res.status(200).send({
