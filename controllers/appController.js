@@ -65,7 +65,8 @@ export async function login(req, res){
                     if (isMatch) {
                         // create jwt token
                         const token = jwt.sign({
-                            id: user._id
+                            id: user._id,
+                            user: user.username
                         }, jwtSecret, { expiresIn : "24h"});
     
                         return res.status(200).send({
