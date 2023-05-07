@@ -1,4 +1,4 @@
-import nodemailer from 'nodemailer';
+import nodemailer from 'nodemailer'; 
 import Mailgen from 'mailgen';
 
 import { emailAddress, emailPassword } from '../config.js';
