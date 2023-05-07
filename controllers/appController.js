@@ -7,7 +7,7 @@ import otpGenerator from 'otp-generator';
 export async function verifyUser(req, res, next){
     const { username } = req.method == "GET" ? req.query : req.body;
 
-    let exist = await User.findOne({ username: username });
+    let exist = await User.findOne({ username: { $eq: username } });
     if (!exist) {
         return res.status(404).json({ message: "User does not exist" });
     }
