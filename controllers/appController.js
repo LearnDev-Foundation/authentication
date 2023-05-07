@@ -18,12 +18,12 @@ export async function register(req, res){
     
     const { username, password, email } = req.body;
 
-    User.findOne({ email: email})
+    User.findOne({ email: { $eq: email } })
         .then(user => {
             if (user) {
                 res.status(409).json({ message: "Email already in use" });
             } else {
-                User.findOne({ username: username })
+                User.findOne({ username: { $eq: username } })
                     .then(user => {
                         if (user) {
                             res.status(409).json({ message: "Username already in use" });
@@ -57,7 +57,7 @@ export async function login(req, res){
     
     const { username, password } = req.body;
 
-    User.findOne({ username: username })
+    User.findOne({ username: { $eq: username } })
         .then(user => {
             bcrypt.compare(password, user.password)
                 .then(isMatch => {
@@ -93,7 +93,7 @@ export async function getUser(req, res){
         return res.status(403).json({ message: "Username not provided" });
     }
 
-    User.findOne({ username: username })
+    User.findOne({ username: { $eq: username } })
         .then(user => {
             if (!user) {
                 res.status(501).json({ message: "User not found" });
