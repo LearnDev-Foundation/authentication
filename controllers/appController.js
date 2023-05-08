@@ -161,7 +161,7 @@ export async function resetPassword(req, res){
     } else {
         const { username, password } = req.body;
     
-        User.findOne({ $eq: username })
+        User.findOne({ username: { $eq: username } })
             .then(user => {
                 if (user) {
                     bcrypt.genSalt(10, (err, salt) => {

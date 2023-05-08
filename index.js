@@ -4,10 +4,17 @@ import morgan from 'morgan';
 import connect from './database/conn.js';
 import router from './routes/route.js';
 import dotenv from 'dotenv';
+import RateLimit from 'express-rate-limit';
 
 dotenv.config();
 
 const app = express();
+
+// Rate limiter
+const limiter = RateLimit({
+    windowMs: 1 * 60 * 1000, // 1 minute
+    max: 5 // 5 requests
+})
 
 // Middlewares
 app.use(express.json());
@@ -17,6 +24,7 @@ app.use(cors({
     origin: 'http://localhost:5173',
     credentials: true
 }));
+app.use(limiter);
   
 
 const port = 8080 || process.env.PORT;
