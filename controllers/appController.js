@@ -116,7 +116,7 @@ export async function updateUser(req, res){
     if (id) {
         const body = req.body;
 
-        User.updateOne({ _id: id }, body)
+        User.updateOne({ _id: { $eq: id } }, body)
             .then(user => {
                 res.status(201).json({ message: "User updated successfully" });
             })
@@ -161,7 +161,7 @@ export async function resetPassword(req, res){
     } else {
         const { username, password } = req.body;
     
-        User.findOne({ username })
+        User.findOne({ $eq: username })
             .then(user => {
                 if (user) {
                     bcrypt.genSalt(10, (err, salt) => {
