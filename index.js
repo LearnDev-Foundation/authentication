@@ -21,7 +21,7 @@ app.use(express.json());
 app.use(morgan('tiny'));
 app.disable('x-powered-by');
 app.use(cors({
-    origin: 'https://ldfacademy.vercel.app/',
+    origin: 'https://ldfacademy.vercel.app',
     credentials: true
 }));
 app.use(limiter);
