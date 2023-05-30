@@ -13,7 +13,7 @@ const app = express();
 // Rate limiter
 const limiter = RateLimit({
     windowMs: 1 * 60 * 1000, // 1 minute
-    max: 5 // 5 requests
+    max: 100 // 100 requests
 })
 
 // Middlewares
